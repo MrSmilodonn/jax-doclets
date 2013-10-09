@@ -18,39 +18,22 @@
  */
 package com.lunatech.doclets.jax;
 
-import java.io.*;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.lunatech.doclets.jax.jaxb.model.JAXBClass;
 import com.lunatech.doclets.jax.jaxrs.model.Resource;
 import com.lunatech.doclets.jax.jaxrs.model.ResourceMethod;
 import com.lunatech.doclets.jax.jpa.model.JPAClass;
 import com.lunatech.doclets.jax.writers.DocletWriter;
-import com.sun.javadoc.AnnotationDesc;
+import com.sun.javadoc.*;
 import com.sun.javadoc.AnnotationDesc.ElementValuePair;
-import com.sun.javadoc.AnnotationTypeDoc;
-import com.sun.javadoc.AnnotationValue;
-import com.sun.javadoc.ClassDoc;
-import com.sun.javadoc.Doc;
-import com.sun.javadoc.MethodDoc;
-import com.sun.javadoc.PackageDoc;
-import com.sun.javadoc.ParamTag;
-import com.sun.javadoc.Parameter;
-import com.sun.javadoc.ParameterizedType;
-import com.sun.javadoc.ProgramElementDoc;
-import com.sun.javadoc.Tag;
-import com.sun.javadoc.Type;
 import com.sun.tools.doclets.formats.html.HtmlDocletWriter;
 import com.sun.tools.doclets.internal.toolkit.Configuration;
-import com.sun.tools.doclets.internal.toolkit.taglets.DeprecatedTaglet;
-import com.sun.tools.doclets.internal.toolkit.taglets.ParamTaglet;
-import com.sun.tools.doclets.internal.toolkit.taglets.Taglet;
-import com.sun.tools.doclets.internal.toolkit.taglets.TagletManager;
-import com.sun.tools.doclets.internal.toolkit.taglets.TagletOutput;
-import com.sun.tools.doclets.internal.toolkit.taglets.TagletWriter;
+import com.sun.tools.doclets.internal.toolkit.taglets.*;
 import com.sun.tools.doclets.internal.toolkit.util.DirectoryManager;
+
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -226,7 +209,7 @@ public class Utils {
   }
 
   public static ClassDoc findAnnotatedClass(final ClassDoc klass, final Class<?>... soughtAnnotations) {
-    if (!klass.isClass() || isExcluded(klass))
+    if ((!klass.isClass() && !klass.isInterface()) || isExcluded(klass))
       return null;
     if (hasAnnotation(klass, soughtAnnotations)) {
       return klass;

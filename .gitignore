@@ -1,8 +1,11 @@
 .classpath
 .project
 .settings/
+.idea/
 bin/
 doclets/.classpath
 doclets/.project
 doclets/.settings/
 target/
+*.iml
+*.ipr
